@@ -22,7 +22,6 @@ print(data_profile)
 # Step 4: Feature Engineering
 # Let's create a new feature 'Weekday' from 'Transaction_Date'
 df['Transaction_Date'] = pd.to_datetime(df['Transaction_Date'])
-df['Weekday'] = df['Transaction_Date'].dt.weekday_name
 
 # Display the updated DataFrame with the new 'Weekday' feature
 print("\nDataFrame with Feature Engineering:")
