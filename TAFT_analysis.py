@@ -9,7 +9,7 @@ response = requests.get(high_risk)
 if response.status_code == 200:
 	blist = BeautifulSoup(response.text,"html.parser")
 else:
-	print("Error connecting wiht the web page") #convertir en exeption
+	print("Error connecting wiht the web page") #convertir en exception
 h3_tags = blist.find_all('h3')
 
 for h3_tag in h3_tags:
@@ -24,14 +24,16 @@ response = requests.get(increased_monitoring)
 if response.status_code == 200:
 	glist = BeautifulSoup(response.text,"html.parser")
 else:
-	print("Error connecting wiht the web page") #convertir en exeption
+	print("Error connecting wiht the web page") #convertir en ecxeption
 specific_div = glist.find('div', {'id': 'title-8b3c1aab42', 'class': 'cmp-title'})
 #print(specific_div)
 if specific_div:
 	preceding_sections = specific_div.find_previous('div',class_ = 'section')
-	preceding_section = preceding_sections[0] if preceding_sections else None 
-	if preceding_section == None:
-		print("h")
+	if preceding_sections == None:
+		print("es none ")
+	#preceding_section = preceding_sections[0] if preceding_sections else None 
+	#if preceding_section == None:
+	#	print("h")
 """ preceding_section = specific_div.find_previous('div',class_='section')
 h3_tags = preceding_section.find_all('h3')
 print("llego1")
