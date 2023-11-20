@@ -5,14 +5,6 @@ import fitz
 
 nlp = spacy.load("en_core_web_sm")
 
-""" # Text preprocessing
-def preprocess_text(text):
-	text = text.lower()
-	text = re.sub(r'[^\w\s]','',text) #Igual no quiero quitar .?
-	return text """
-
-
-
 def	find_high_risk_countries(text, high_risk_countries):
 	matches = []
 	for country in high_risk_countries:
@@ -21,6 +13,10 @@ def	find_high_risk_countries(text, high_risk_countries):
 			matches.append(country)
 	return matches
 
+def remove_non_printable(doc):
+    filtered_tokens = [token.text for token in doc if re.match(r'^[ -~]+$', token.text)]
+    return spacy.tokens.Doc(doc.vocab, words=filtered_tokens)
+
 def context_aware_country_search(text, high_risk_countries):
     doc = nlp(text)
     matches = []
@@ -28,6 +24,19 @@ def context_aware_country_search(text, high_risk_countries):
     for ent in doc.ents:
         if ent.text.lower() in high_risk_countries:
             matches.append(ent.text.lower())
+
+    return matches
+
+def context_aware_country_search_prueba(text, high_risk_countries):
+    doc = nlp(text)
+    nlp.add_pipe('remove_non_printable',name="remove_non_printable",last = True) # TODO: BORRAR
+    matches = []
+
+    for sent in doc.sents:
+        for ent in sent.ents:
+            if ent.text.lower() in high_risk_countries:
+                matches.append(sent.text.strip())
+                break  # Stop searching within the sentence if a match is found
 
     return matches
 
@@ -55,6 +64,7 @@ def read_pdf_and_search(file_path, high_risk_countries):
 # Example usage
 #pdf_file_path = "C:\\Desktop\\integrated-managemet-report-2022.pdf" Esto lo quiero cambiar!!!
 pdf = "integrated-management-report-2022.pdf"
-high_risk_countries = ["february","españa","spain"] #tengo que controlar las distintas formas en las que se escriben ciertos paises!! EEUU y en varios idiomas
+high_risk_countries = ["february"] #tengo que controlar las distintas formas en las que se escriben ciertos paises!! EEUU y en varios idiomas
 
 read_pdf_and_search(pdf, high_risk_countries)
+print("Fin del programa")
