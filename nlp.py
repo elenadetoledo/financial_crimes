@@ -23,11 +23,12 @@ def context_aware_country_search(text, high_risk_countries):
 
     for ent in doc.ents:
         if ent.text.lower() in high_risk_countries:
+            print(ent.text, ent.label_)
             matches.append(ent.text.lower())
 
     return matches
 
-def context_aware_country_search_prueba(text, high_risk_countries):
+""" def context_aware_country_search_prueba(text, high_risk_countries):
     doc = nlp(text)
     nlp.add_pipe('remove_non_printable',name="remove_non_printable",last = True) # TODO: BORRAR
     matches = []
@@ -38,7 +39,7 @@ def context_aware_country_search_prueba(text, high_risk_countries):
                 matches.append(sent.text.strip())
                 break  # Stop searching within the sentence if a match is found
 
-    return matches
+    return matches """
 
 def read_pdf_and_search(file_path, high_risk_countries):
     # Open the PDF file
@@ -63,8 +64,9 @@ def read_pdf_and_search(file_path, high_risk_countries):
 
 # Example usage
 #pdf_file_path = "C:\\Desktop\\integrated-managemet-report-2022.pdf" Esto lo quiero cambiar!!!
-pdf = "integrated-management-report-2022.pdf"
-high_risk_countries = ["february"] #tengo que controlar las distintas formas en las que se escriben ciertos paises!! EEUU y en varios idiomas
+#pdf = "integrated-management-report-2022.pdf"
+pdf = "pruebas_SCIB.pdf"
+high_risk_countries = ["cuba","spain"] #tengo que controlar las distintas formas en las que se escriben ciertos paises!! EEUU y en varios idiomas
 
 read_pdf_and_search(pdf, high_risk_countries)
 print("Fin del programa")
