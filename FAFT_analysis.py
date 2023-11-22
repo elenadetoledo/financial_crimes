@@ -28,7 +28,7 @@ else:
 	for c in black_list_countries:
 		print(c)
 
-#Now, I'll analyze the grey list:
+ #Now, I'll analyze the grey list:
 increased_monitoring = "https://www.fatf-gafi.org/en/publications/High-risk-and-other-monitored-jurisdictions/Increased-monitoring-october-2023.html"
 grey_list_countries =[]
 response = requests.get(increased_monitoring)
@@ -45,4 +45,4 @@ if len(grey_list_countries) == 0:
 else:
 	print("Increased monitoring jurisdictions:")
 	for c in grey_list_countries:
-		print(c)
+		print(c) 
