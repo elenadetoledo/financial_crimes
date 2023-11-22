@@ -53,5 +53,4 @@ pdf = "integrated-management-report-2022.pdf"
 high_risk_activities = ["arms","casino","gambling","forestry","fishing","mineral","gas","oil",
 				 "petroleum","carbon","nuclear","pharmaceutical", "tourism"]
 
-
 read_pdf_and_search(pdf, high_risk_activities)
