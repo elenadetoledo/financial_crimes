@@ -41,12 +41,16 @@ def read_pdf_and_search(file_path, high_risk_activities):
     #Text preprocessin: writing everything in vowels to unify the format in the whole document
     preprocessed_text = text.lower()
     matches = []
+    lemmatized_text = " ".join([token.lemma_ for token in nlp(" ".join(high_risk_activities))])
+    # Tokenize the lemmatized text to get a list of lemmatized elements
+    lemmatized_list = [token.text for token in nlp(lemmatized_text)]
+    high_risk_activities_lemmas = []
     #Create a document
     doc = nlp(text)
     #Iterate the entities in the document
-    for ent in doc.ents:
-        if ent.text.lower() in high_risk_activities:
-            matches.append(ent.text.lower())
+    for token in doc:
+        if token.lemma in lemmatized_list:
+            matches.append(token.text)
     # Output the matches
     if matches:
         print("Some high-risk activities have been found:")
