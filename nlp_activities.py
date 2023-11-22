@@ -6,18 +6,6 @@ import fitz
 #I load the model for nlp in english
 nlp = spacy.load("en_core_web_sm")
 
-#Function for looking for countries in the right context
-def high_risk_activities_search(text, high_risk_activities):
-    doc = nlp(text)
-    matches = []
-
-    for ent in doc.ents:
-        if ent.text.lower() in high_risk_countries:
-            print(ent.text, ent.label_)
-            matches.append(ent.text.lower())
-
-    return matches
-
 #Function to print a summary of the findings of the function
 def printing_summary(matches):
     result_dict = {}
