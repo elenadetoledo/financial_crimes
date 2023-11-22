@@ -42,11 +42,15 @@ def read_pdf_and_search(file_path, high_risk_countries):
         for page_num in range(pdf_document.page_count):
             page = pdf_document[page_num]
             text += page.get_text()
+    #Text preprocessin: writing everything in vowels to unify the format in the whole document
     preprocessed_text = text.lower()
     matches = []
+    #Create a document
     doc = nlp(text)
+    #Iterate the entities in the document
     for ent in doc.ents:
         if ent.text.lower() in high_risk_countries:
+            #Checking whether the entity is part of a larger entity or not
             if is_not_part_of_larger_entity(ent.text, ent.root.text, ent.root.dep_):
                 matches.append(ent.text.lower())
     # Output the matches
