@@ -1,5 +1,5 @@
 """ Code by Elena de Toledo Hernández
-Implementation of NLP techniques for the detection of high-risk countries"""
+Implementation of NLP techniques for the detection of high-risk countries via entitiy analysis"""
 import spacy
 import fitz
 
